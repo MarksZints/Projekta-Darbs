@@ -1,0 +1,21 @@
+#poga{
+    margin:10px;
+}
+#tabula{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+img {
+    max-width: 100%; /* Saglabā attēla proporcionālo platumu */
+    height: auto;
+    display: block; /* Novērš lielu tukšuma rindu, ko dažreiz radījusi inline-block attēlu ievietošana */
+    margin: 0 auto; /* Centrē attēlu tabulas šūnā */
+  }
