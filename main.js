@@ -29,24 +29,33 @@ function sajauktDatus() {
 
     for (let i = 0; i < kopasgarums; i++) {
         // Izveido div elementu, lai noteiktu izmēru kārtij;
-        let div=document.createElement("div");
-        div.classList.add("kartina");
+        let kartina=document.createElement("div");
+        kartina.classList.add("kartina");
         //izveidojam vēl vienu div, kas kalpos kā kārts priekšpuse
         let kartsPrieksa=document.createElement("div");
-        kartsPrieksa.classList.add("kartina");
+        kartsPrieksa.classList.add("prieksa");
         let bildePrieksa=document.createElement("img");
         bildePrieksa.setAttribute("src",kopaPrieksa[0]);
         bildePrieksa.classList.add("bildes");
         kartsPrieksa.appendChild(bildePrieksa);
+
+     
         //izveidojam div, kas kalpos kā kārts aizmugure
         let kartsAizmugure=document.createElement("div");
-        kartsAizmugure.classList.add("kartina");
+        kartsAizmugure.classList.add("aizmugure");
         let bildeAizmugure=document.createElement("img");
         bildeAizmugure.setAttribute("src", kopa[i]);
         bildeAizmugure.classList.add("bildes");
         kartsAizmugure.appendChild(bildeAizmugure);
+ 
 
-        div.appendChild(kartsPrieksa,kartsAizmugure);
-        sunas[i].appendChild(div);
-    }
+        kartina.appendChild(kartsPrieksa);
+       kartina.appendChild(kartsAizmugure);
+        sunas[i].appendChild(kartina);
+    
+kartina.addEventListener("click", apgrieztKartinu);
+function apgrieztKartinu(){
+    kartina.classList.toggle("apgriezta");
+}
+}
 }
