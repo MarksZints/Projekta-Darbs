@@ -11,6 +11,8 @@ const kopa=["https://upload.wikimedia.org/wikipedia/lv/thumb/b/b8/Smiltenes_vidu
 "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NR-1Titulbilde.tif/lossy-page1-1200px-NR-1Titulbilde.tif.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NR-1Titulbilde.tif/lossy-page1-1200px-NR-1Titulbilde.tif.jpg"];
 
+const kopaPrieksa=["https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Card_back_01.svg/703px-Card_back_01.svg.png"];
+
 const kopasgarums = kopa.length;
 const tabulina = document.getElementById("tabula");
 const sunas = tabulina.getElementsByTagName('td');
@@ -26,9 +28,25 @@ function sajauktDatus() {
     }
 
     for (let i = 0; i < kopasgarums; i++) {
-        // Izmanto esošo <td> elementu un pievieno tekstu "Sveiki"
-        let bilde=document.createElement("img");
-        bilde.setAttribute("src", kopa[i]);
-        sunas[i].appendChild(bilde);
+        // Izveido div elementu, lai noteiktu izmēru kārtij;
+        let div=document.createElement("div");
+        div.classList.add("kartina");
+        //izveidojam vēl vienu div, kas kalpos kā kārts priekšpuse
+        let kartsPrieksa=document.createElement("div");
+        kartsPrieksa.classList.add("kartina");
+        let bildePrieksa=document.createElement("img");
+        bildePrieksa.setAttribute("src",kopaPrieksa[0]);
+        bildePrieksa.classList.add("bildes");
+        kartsPrieksa.appendChild(bildePrieksa);
+        //izveidojam div, kas kalpos kā kārts aizmugure
+        let kartsAizmugure=document.createElement("div");
+        kartsAizmugure.classList.add("kartina");
+        let bildeAizmugure=document.createElement("img");
+        bildeAizmugure.setAttribute("src", kopa[i]);
+        bildeAizmugure.classList.add("bildes");
+        kartsAizmugure.appendChild(bildeAizmugure);
+
+        div.appendChild(kartsPrieksa,kartsAizmugure);
+        sunas[i].appendChild(div);
     }
 }
