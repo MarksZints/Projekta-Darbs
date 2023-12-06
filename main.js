@@ -55,7 +55,46 @@ function sajauktDatus() {
     
 kartina.addEventListener("click", apgrieztKartinu);
 function apgrieztKartinu(){
-    kartina.classList.toggle("apgriezta");
-}
-}
+   //tiek pievienota klase "apgriezta, kas apgriež karti otrādāk"
+    this.classList.toggle("apgriezta");
+    //pie divasKartinas tiek pievienota konkrētā kartiņa
+    divasKartinas.push(this);
+    a=a+1;
+    //ja a=2 jeb, ja 2 kartiņas ir izvēlētas, notiek funkcija, kas pārbauda, vai kartiņas ir vienādas.
+   
+    if(a==2){          //ŠEIT SĀKAS IF a==2 CIKLS, 
+       
+        //pēc 2 sekundēm notiek funckija
+        setTimeout(parbauditVaiVienadas, 2000);
+        }
+    function parbauditVaiVienadas(){
+
+            //ja nosacījums neizpildās, (ja kartiņas nav vienādas) , tad...
+           if (divasKartinas[0].querySelector(".aizmugure img").src != divasKartinas[1].querySelector(".aizmugure img").src) {
+                setTimeout(neapsveicam, 1000);
+                //tad katra no kartiņām tiek apgriezta atpakaļ
+            for (const kartina of divasKartinas) {
+              kartina.classList.toggle("apgriezta");  
+              }
+              //atjaunojas a cikls, kā arī izdzēšas saraksts "divas kartiņas", lai tām pēc tam būtu pievienotas atkal divas, jaunas kartiņas
+              a=0;
+              divasKartinas=[];
+              function neapsveicam(){
+                alert("nepareizi");
+              }
+            }  
+
+    //ja nosacījums izpildās, (ja kartiņas ir vienādas), tad...
+         if (divasKartinas[0].querySelector(".aizmugure img").src == divasKartinas[1].querySelector(".aizmugure img").src) {
+           setTimeout(apsveicam,1000);
+        }
+        //atjaunojas a cikls, kā arī izdzēšas saraksts "divas kartiņas", lai tām pēc tam būtu pievienotas atkal divas, jaunas kartiņas
+        a=0;
+        divasKartinas=[];
+        function apsveicam(){
+        alert("apsveicam");
+        }
+        //šoreiz kartiņas nepagriežas otrādāk, jo tā tika atminētas
+        
+    }                   //ŠEIT BEIDZAS IF a==2  CIKLS
 }
