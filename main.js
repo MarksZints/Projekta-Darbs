@@ -21,7 +21,7 @@ function sajauktDatus() {
     for (let i = 0; i < sunas.length; i++) {
         sunas[i].innerHTML = "";
       }
-      
+     
     for (let i = 0; i < kopasgarums; i++) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
         [kopa[i], kopa[randomIndex]] = [kopa[randomIndex], kopa[i]];
@@ -52,10 +52,13 @@ function sajauktDatus() {
         kartina.appendChild(kartsPrieksa);
        kartina.appendChild(kartsAizmugure);
         sunas[i].appendChild(kartina);
-    
 kartina.addEventListener("click", apgrieztKartinu);
+}
+}
+let divasKartinas=[];
+let a=0;
 function apgrieztKartinu(){
-   //tiek pievienota klase "apgriezta, kas apgriež karti otrādāk"
+    //tiek pievienota klase "apgriezta, kas apgriež karti otrādāk"
     this.classList.toggle("apgriezta");
     //pie divasKartinas tiek pievienota konkrētā kartiņa
     divasKartinas.push(this);
