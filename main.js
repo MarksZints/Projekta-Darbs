@@ -11,7 +11,7 @@ const kopa=["https://upload.wikimedia.org/wikipedia/lv/thumb/b/b8/Smiltenes_vidu
 "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NR-1Titulbilde.tif/lossy-page1-1200px-NR-1Titulbilde.tif.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NR-1Titulbilde.tif/lossy-page1-1200px-NR-1Titulbilde.tif.jpg"];
 
-const kopaPrieksa=["https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Card_back_01.svg/703px-Card_back_01.svg.png"];
+const kopaPrieksa=["https://github.com/MarksZints/att-li/blob/main/prieksa%20(1).png?raw=true.png"];
 
 const kopasgarums = kopa.length;
 const tabulina = document.getElementById("tabula");
@@ -56,48 +56,39 @@ kartina.addEventListener("click", apgrieztKartinu);
 }
 }
 let divasKartinas=[];
-let a=0;
-function apgrieztKartinu(){
-    //tiek pievienota klase "apgriezta, kas apgriež karti otrādāk"
-    this.classList.toggle("apgriezta");
-    //pie divasKartinas tiek pievienota konkrētā kartiņa
-    divasKartinas.push(this);
-    a=a+1;
-    //ja a=2 jeb, ja 2 kartiņas ir izvēlētas, notiek funkcija, kas pārbauda, vai kartiņas ir vienādas.
-   
-    if(a==2){          //ŠEIT SĀKAS IF a==2 CIKLS, 
-       
-        //pēc 2 sekundēm notiek funckija
-        setTimeout(parbauditVaiVienadas, 2000);
-        }
-    function parbauditVaiVienadas(){
+let kartesApgriesanasBloks = false;
 
-            //ja nosacījums neizpildās, (ja kartiņas nav vienādas) , tad...
-           if (divasKartinas[0].querySelector(".aizmugure img").src != divasKartinas[1].querySelector(".aizmugure img").src) {
-                setTimeout(neapsveicam, 1000);
-                //tad katra no kartiņām tiek apgriezta atpakaļ
-            for (const kartina of divasKartinas) {
-              kartina.classList.toggle("apgriezta");  
-              }
-              //atjaunojas a cikls, kā arī izdzēšas saraksts "divas kartiņas", lai tām pēc tam būtu pievienotas atkal divas, jaunas kartiņas
-              a=0;
-              divasKartinas=[];
-              function neapsveicam(){
-                alert("nepareizi");
-              }
-            }  
 
-    //ja nosacījums izpildās, (ja kartiņas ir vienādas), tad...
-         if (divasKartinas[0].querySelector(".aizmugure img").src == divasKartinas[1].querySelector(".aizmugure img").src) {
-           setTimeout(apsveicam,1000);
+function apgrieztKartinu() {
+    if (!kartesApgriesanasBloks) {
+        this.classList.toggle("apgriezta");
+        divasKartinas.push(this);
+        this.removeEventListener("click", apgrieztKartinu);
+
+        if (divasKartinas.length === 2) {
+            kartesApgriesanasBloks = true;
+            setTimeout(parbauditVaiVienadas, 2000);
         }
-        //atjaunojas a cikls, kā arī izdzēšas saraksts "divas kartiņas", lai tām pēc tam būtu pievienotas atkal divas, jaunas kartiņas
-        a=0;
-        divasKartinas=[];
-        function apsveicam(){
-        alert("apsveicam");
-        }
-        //šoreiz kartiņas nepagriežas otrādāk, jo tā tika atminētas
-        
-    }                   //ŠEIT BEIDZAS IF a==2  CIKLS
+    }
+}
+
+function parbauditVaiVienadas() {
+    const bilde1 = divasKartinas[0].querySelector(".aizmugure img").src;
+    const bilde2 = divasKartinas[1].querySelector(".aizmugure img").src;
+
+    if (bilde1 !== bilde2) {
+        divasKartinas.forEach(kartina => {
+            kartina.classList.toggle("apgriezta");
+            kartina.addEventListener("click", apgrieztKartinu);
+        });
+
+
+        setTimeout(() => {
+            divasKartinas = [];
+            kartesApgriesanasBloks = false;
+        }, 1000);
+    } else {
+        divasKartinas = [];
+        kartesApgriesanasBloks = false;
+    }
 }
