@@ -1,5 +1,5 @@
+
 #tabula td {
-  border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
   box-sizing: border-box;
@@ -11,6 +11,7 @@
   height: 380px;
   transform-style: preserve-3d;
   transition: all 2s ease;
+  border-radius: 10px;
 }
 .prieksa{
   position:absolute;
@@ -18,6 +19,9 @@
   height:100%;
   backface-visibility: hidden;
   background-color: #333;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
 }
 .aizmugure{
   position:absolute;
@@ -26,10 +30,14 @@
   backface-visibility: hidden;
   background-color: #e60e0e;
   transform: rotateY(180deg);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
 }
 .bildes{
-  width:220px;
-  height:330px;
+  width:237.5px;
+  height: 361px;
+  border-radius: 10px;
 }
 .apgriezta{
 transform: rotateY(180deg);
