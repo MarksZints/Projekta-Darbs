@@ -42,3 +42,71 @@
 .apgriezta{
 transform: rotateY(180deg);
 }
+body{
+    background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/3189.jpg");
+    background-size: cover; 
+}
+.rules{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #7e09dd;
+  border-radius: 15px;
+  width: 60%;
+  height:70%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+#virsraksts{
+  margin-top: 30px;
+  font-size: 500%; 
+  color: beige;
+}
+#turpinat{
+  width: 30%;
+  height:20%;
+  margin-left: 35%;
+  margin-bottom: 4%;
+  border-radius: 50px;
+  font-size: 250%; 
+  background-color: rgb(0, 177, 53);
+}
+#noteikumuApraksts{
+  font-size: 250%; 
+  color: beige;
+  margin: 2%;
+}
+.neredzams {
+  display: none;
+}
+.opcijas{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #7e09dd;
+  border-radius: 15px;
+  width: 60%;
+  height:70%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.saktSpeli{
+  width: 30%;
+  height:20%;
+  margin: 10%;
+  margin-left: 35%;
+  border-radius: 50px;
+  font-size: 250%; 
+  background-color: rgb(0, 177, 53);
+  align-items: center; 
+  justify-content: center; 
+  overflow: hidden;
+}
+.pogasTeksts{
+  color: beige;
+  margin: 2%;
+}
