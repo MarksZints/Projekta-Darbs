@@ -3,9 +3,27 @@ let noteikumi=document.getElementById("noteikumi");
 turpinat.addEventListener("click", nonemt);
 
 function nonemt(){
-
+ 
+//tiek noņemts pirmais uznirstošais logs ar noteikumiem
 noteikumi.classList.remove("rules");
 noteikumi.classList.add("neredzams");
+
+let kluduSkaits=0;
+let pareizoSkaits=0;
+const tabulina = document.getElementById("tabula");
+const rindas=tabulina.getElementsByTagName("tr");
+
+//tiek izveidota grutibas pakapes izvēles poga
+
+const izvelesPoga = document.createElement("select");
+izvelesPoga.classList.add("izvelesPoga");
+const opcijas = ["Opcija 1", "Opcija 2", "Opcija 3"];
+opcijas.forEach((opcija, indekss) => {
+    const jaunaOpcija = document.createElement("option");
+    jaunaOpcija.value = indekss + 1;
+    jaunaOpcija.text = opcija;
+    izvelesPoga.add(jaunaOpcija);
+});
 
 let opcijuDiv=document.createElement("div");
 opcijuDiv.classList.add("opcijas");
@@ -14,26 +32,21 @@ let saktSpeli=document.createElement("button");
 saktSpeli.classList.add("saktSpeli");
 
 let tekstsPogai=document.createElement("p");
-tekstsPogai.innerText="Spied";
+tekstsPogai.innerText="Spied, lai sāktu spēli";
 tekstsPogai.classList.add("pogasTeksts");
 
 saktSpeli.appendChild(tekstsPogai);
 opcijuDiv.appendChild(saktSpeli);
+opcijuDiv.appendChild(izvelesPoga);
 
 var bodyElements = document.body;
 setTimeout(() => {
     bodyElements.appendChild(opcijuDiv);
 }, 1000);
+
 saktSpeli.addEventListener("click", sajauktDatus);
-
-
-
-
-
-
-let vienadiPari=4;
-let kluduSkaits=0;
-let pareizoSkaits=0;
+//tiek nodefinēti elementi= tabula, rindas tabulā, tabulu šūnu skaits un kāršu pāru skaits, kā arī grūtības pakāpe.
+function sajauktDatus() {
 const kopa=["https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://static.lsm.lv/media/2021/06/large/1/ffi2.jpg",
@@ -44,16 +57,30 @@ const kopa=["https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NR-1Titulbilde.tif/lossy-page1-1200px-NR-1Titulbilde.tif.jpg"];
 
 const kopaPrieksa=["https://github.com/MarksZints/att-li/blob/main/prieksa%20(1).png?raw=true.png"];
+const papildusBildes=["https://img.pilseta24.lv/media/768x575c/users/article/galleries/150/524/15052411.jpg",
+"https://img.pilseta24.lv/media/768x575c/users/article/galleries/150/524/15052411.jpg"];
 
-const kopasgarums = kopa.length;
-const tabulina = document.getElementById("tabula");
-const sunas = tabulina.getElementsByTagName('td');
 
-function sajauktDatus() {
+
+
+//ja grūtībās pakāpe ir 2, tiek katrā rindā pievienotas vairāk šūnas
+
+    let grutibasPakape=izvelesPoga.value;
+
+    if(grutibasPakape==2){
+        for(i=0;i<rindas.length;i=i+1){
+            kopa.push(papildusBildes[i]);
+            rindas[i].insertCell(); 
+    }
+    }
+
+    //tiek noteikts tabulas šūnu skaits
+    const sunas = tabulina.getElementsByTagName('td');
+    const kopasgarums = kopa.length;
+    vienadiPari=kopasgarums/2;
+
     opcijuDiv.classList.remove("opcijas");
     opcijuDiv.classList.add("neredzams");
-
-    
 
     for (let i = 0; i < sunas.length; i++) {
         sunas[i].innerHTML = "";
@@ -92,15 +119,16 @@ function sajauktDatus() {
         kartina.classList.toggle("apgriezta");
         setTimeout(() => {
         kartina.classList.toggle("apgriezta");
-        }, 3000);
-kartina.addEventListener("click", apgrieztKartinu);
+        kartina.addEventListener("click", apgrieztKartinu);
+        }, 5000);
+
 }
 }
 
 let divasKartinas=[];
 let kartesApgriesanasBloks = false;
 
-
+//apskates laiks ir beidzies, kartiņas ir apgriezušās, sākas funkcija apgriezt kartiņu
 function apgrieztKartinu() {
     if (!kartesApgriesanasBloks) {
         this.classList.toggle("apgriezta");
