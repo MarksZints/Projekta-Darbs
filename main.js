@@ -16,11 +16,10 @@ const tabulina = document.getElementById("tabula");
 
 const izvelesPoga = document.createElement("select");
 izvelesPoga.classList.add("izvelesPoga");
-const opcijas = ["Opcija 1", "Opcija 2", "Opcija 3"];
-let vertibas= ["4","8","12"];
+const opcijas = [4,8,12,14,16,18,20];
 opcijas.forEach((opcija, indekss) => {
     const jaunaOpcija = document.createElement("option");
-    jaunaOpcija.value = vertibas[indekss];
+    jaunaOpcija.value = opcijas[indekss];
     jaunaOpcija.text = opcija;
     izvelesPoga.add(jaunaOpcija);
 });
@@ -61,6 +60,14 @@ const kopa=["https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://ziemellatvija.lv/wp-content/uploads/2022/07/smiltenes-svetki.jpg",
 "https://i.tiesraides.lv/1200x0s/pictures/2023-08-25/5499_autokross.jpg",
 "https://i.tiesraides.lv/1200x0s/pictures/2023-08-25/5499_autokross.jpg",
+"https://ziemellatvija.lv/wp-content/uploads/2022/03/10551563_579606918812676_1775675797406723621_o-1024x735.jpg",
+"https://ziemellatvija.lv/wp-content/uploads/2022/03/10551563_579606918812676_1775675797406723621_o-1024x735.jpg",
+"https://www.latvia.travel/sites/default/files/styles/mobile_promo/public/media_image/tourism_sight/vecais_parks_pargaznis_evija_ziemina.jpg?itok=wKwzxnos.jpg",
+"https://www.latvia.travel/sites/default/files/styles/mobile_promo/public/media_image/tourism_sight/vecais_parks_pargaznis_evija_ziemina.jpg?itok=wKwzxnos.jpg",
+"https://aluksniesiem.lv/wp-content/uploads/2022/11/37-1024x633.jpg",
+"https://aluksniesiem.lv/wp-content/uploads/2022/11/37-1024x633.jpg",
+
+
 ];
 
 const kopaPrieksa=["https://github.com/MarksZints/att-li/blob/main/prieksa%20(1).png?raw=true.png"];
@@ -73,7 +80,7 @@ const kopaPrieksa=["https://github.com/MarksZints/att-li/blob/main/prieksa%20(1)
 
 let grutibasPakape=izvelesPoga.value;
  
- if (grutibasPakape % 4 == 0 && grutibasPakape != 8) {
+ if (grutibasPakape % 4 == 0 ) {
     let rinduSkaits = grutibasPakape / 4;
     for (let a = 0; a < rinduSkaits; a++) {
         let rinda = document.createElement("tr");
