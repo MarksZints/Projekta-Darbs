@@ -11,16 +11,16 @@ noteikumi.classList.add("neredzams");
 let kluduSkaits=0;
 let pareizoSkaits=0;
 const tabulina = document.getElementById("tabula");
-const rindas=tabulina.getElementsByTagName("tr");
 
 //tiek izveidota grutibas pakapes izvēles poga
 
 const izvelesPoga = document.createElement("select");
 izvelesPoga.classList.add("izvelesPoga");
 const opcijas = ["Opcija 1", "Opcija 2", "Opcija 3"];
+let vertibas= ["4","8","12"];
 opcijas.forEach((opcija, indekss) => {
     const jaunaOpcija = document.createElement("option");
-    jaunaOpcija.value = indekss + 1;
+    jaunaOpcija.value = vertibas[indekss];
     jaunaOpcija.text = opcija;
     izvelesPoga.add(jaunaOpcija);
 });
@@ -54,31 +54,44 @@ const kopa=["https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://ziemellatvija.lv/wp-content/uploads/2023/08/ista-smiltenes-stounhendza-1024x635.jpg",
 "https://ziemellatvija.lv/wp-content/uploads/2023/08/ista-smiltenes-stounhendza-1024x635.jpg",
 "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NR-1Titulbilde.tif/lossy-page1-1200px-NR-1Titulbilde.tif.jpg",
-"https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NR-1Titulbilde.tif/lossy-page1-1200px-NR-1Titulbilde.tif.jpg"];
+"https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/NR-1Titulbilde.tif/lossy-page1-1200px-NR-1Titulbilde.tif.jpg",
+"https://img.pilseta24.lv/media/768x575c/users/article/galleries/150/524/15052411.jpg",
+"https://img.pilseta24.lv/media/768x575c/users/article/galleries/150/524/15052411.jpg",
+"https://ziemellatvija.lv/wp-content/uploads/2022/07/smiltenes-svetki.jpg",
+"https://ziemellatvija.lv/wp-content/uploads/2022/07/smiltenes-svetki.jpg",
+"https://i.tiesraides.lv/1200x0s/pictures/2023-08-25/5499_autokross.jpg",
+"https://i.tiesraides.lv/1200x0s/pictures/2023-08-25/5499_autokross.jpg",
+];
 
 const kopaPrieksa=["https://github.com/MarksZints/att-li/blob/main/prieksa%20(1).png?raw=true.png"];
-const papildusBildes=["https://img.pilseta24.lv/media/768x575c/users/article/galleries/150/524/15052411.jpg",
-"https://img.pilseta24.lv/media/768x575c/users/article/galleries/150/524/15052411.jpg"];
+
 
 
 
 
 //ja grūtībās pakāpe ir 2, tiek katrā rindā pievienotas vairāk šūnas
 
-    let grutibasPakape=izvelesPoga.value;
+let grutibasPakape=izvelesPoga.value;
+ 
+ if (grutibasPakape % 4 == 0 && grutibasPakape != 8) {
+    let rinduSkaits = grutibasPakape / 4;
+    for (let a = 0; a < rinduSkaits; a++) {
+        let rinda = document.createElement("tr");
+        for (let i = 0; i < 4; i++) {
+            rinda.insertCell();
+        }
+        tabulina.appendChild(rinda);
+    }
+       
+    }
+    const sunas = tabulina.getElementsByTagName('td');
+alert("grūtības pakāpe ir " +grutibasPakape);
 
-    if(grutibasPakape==2){
-        for(i=0;i<rindas.length;i=i+1){
-            kopa.push(papildusBildes[i]);
-            rindas[i].insertCell(); 
-    }
-    }
+
+
 
     //tiek noteikts tabulas šūnu skaits
-    const sunas = tabulina.getElementsByTagName('td');
-    const kopasgarums = kopa.length;
-    vienadiPari=kopasgarums/2;
-
+    vienadiPari=grutibasPakape/2;
     opcijuDiv.classList.remove("opcijas");
     opcijuDiv.classList.add("neredzams");
 
@@ -86,12 +99,11 @@ const papildusBildes=["https://img.pilseta24.lv/media/768x575c/users/article/gal
         sunas[i].innerHTML = "";
       }
      
-    for (let i = 0; i < kopasgarums; i++) {
+    for (let i = 0; i < grutibasPakape; i++) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
         [kopa[i], kopa[randomIndex]] = [kopa[randomIndex], kopa[i]];
     }
-
-    for (let i = 0; i < kopasgarums; i++) {
+    for (let i = 0; i < grutibasPakape; i++) {
         // Izveido div elementu, lai noteiktu izmēru kārtij;
         let kartina=document.createElement("div");
         kartina.classList.add("kartina");
@@ -124,7 +136,6 @@ const papildusBildes=["https://img.pilseta24.lv/media/768x575c/users/article/gal
 
 }
 }
-
 let divasKartinas=[];
 let kartesApgriesanasBloks = false;
 
