@@ -1,5 +1,6 @@
 let turpinat=document.getElementById("turpinat");
 let noteikumi=document.getElementById("noteikumi");
+let vienadiPari=0;
 turpinat.addEventListener("click", nonemt);
 
 function nonemt(){
@@ -16,7 +17,7 @@ const tabulina = document.getElementById("tabula");
 
 const izvelesPoga = document.createElement("select");
 izvelesPoga.classList.add("izvelesPoga");
-const opcijas = [4,8,12,14,16,18,20];
+const opcijas = [8,10,12,14,16,18,20];
 opcijas.forEach((opcija, indekss) => {
     const jaunaOpcija = document.createElement("option");
     jaunaOpcija.value = opcijas[indekss];
@@ -68,6 +69,7 @@ const kopa=["https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://aluksniesiem.lv/wp-content/uploads/2022/11/37-1024x633.jpg",
 
 
+
 ];
 
 const kopaPrieksa=["https://github.com/MarksZints/att-li/blob/main/prieksa%20(1).png?raw=true.png"];
@@ -79,8 +81,21 @@ const kopaPrieksa=["https://github.com/MarksZints/att-li/blob/main/prieksa%20(1)
 //ja grūtībās pakāpe ir 2, tiek katrā rindā pievienotas vairāk šūnas
 
 let grutibasPakape=izvelesPoga.value;
- 
- if (grutibasPakape % 4 == 0 ) {
+let nedalasArCetri=false;
+
+if (grutibasPakape % 5 == 0) {
+    let rinduSkaits = grutibasPakape / 5;
+    for (let a = 0; a < rinduSkaits; a++) {
+        let rinda = document.createElement("tr");
+        for (let i = 0; i < 5; i++) {
+            rinda.insertCell();
+        }
+        tabulina.appendChild(rinda);
+    }
+} 
+
+
+else if (grutibasPakape % 4 == 0) {
     let rinduSkaits = grutibasPakape / 4;
     for (let a = 0; a < rinduSkaits; a++) {
         let rinda = document.createElement("tr");
@@ -89,28 +104,54 @@ let grutibasPakape=izvelesPoga.value;
         }
         tabulina.appendChild(rinda);
     }
-       
+}
+
+else  {
+    let rinduSkaits = parseFloat(grutibasPakape +2)/ 4;
+    grutibasPakape=parseFloat(grutibasPakape)+2;
+    for (let a = 0; a < rinduSkaits; a++) {
+        let rinda = document.createElement("tr");
+        for (let i = 0; i < 4; i++) {
+            rinda.insertCell();
+        }
+        tabulina.appendChild(rinda);
     }
+    nedalasArCetri=true;
+}
+       
     const sunas = tabulina.getElementsByTagName('td');
 alert("grūtības pakāpe ir " +grutibasPakape);
 
 
 
 
-    //tiek noteikts tabulas šūnu skaits
-    vienadiPari=grutibasPakape/2;
     opcijuDiv.classList.remove("opcijas");
     opcijuDiv.classList.add("neredzams");
 
     for (let i = 0; i < sunas.length; i++) {
         sunas[i].innerHTML = "";
       }
-     
+//kārtis tiek samaisītas nejaušā secībā (bilžu skaits nedalās ar 4)
+if(nedalasArCetri==true){
+    for (let i = 0; i < (grutibasPakape-2); i++) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [kopa[i], kopa[randomIndex]] = [kopa[randomIndex], kopa[i]];
+    }
+    vienadiPari=(grutibasPakape-2)/2;
+    alert(vienadiPari);
+}
+//kārtis tiek samaisītas nejaušā secībā  (bilžu skaits dalās ar 4)
+else if(nedalasArCetri==false){
     for (let i = 0; i < grutibasPakape; i++) {
         const randomIndex = Math.floor(Math.random() * (i + 1));
         [kopa[i], kopa[randomIndex]] = [kopa[randomIndex], kopa[i]];
     }
+vienadiPari=(grutibasPakape)/2;
+}
+let kartasSkaitlis=0;
+
     for (let i = 0; i < grutibasPakape; i++) {
+        if(nedalasArCetri==false){
         // Izveido div elementu, lai noteiktu izmēru kārtij;
         let kartina=document.createElement("div");
         kartina.classList.add("kartina");
@@ -140,9 +181,49 @@ alert("grūtības pakāpe ir " +grutibasPakape);
         kartina.classList.toggle("apgriezta");
         kartina.addEventListener("click", apgrieztKartinu);
         }, 5000);
+    }
+
+
+    else if(nedalasArCetri==true){
+        if(i!=grutibasPakape-4 && i!=grutibasPakape-1){
+        console.log(kartasSkaitlis);
+        console.log(i);
+        // Izveido div elementu, lai noteiktu izmēru kārtij;
+        let kartina=document.createElement("div");
+        kartina.classList.add("kartina");
+        //izveidojam vēl vienu div, kas kalpos kā kārts priekšpuse
+        let kartsPrieksa=document.createElement("div");
+        kartsPrieksa.classList.add("prieksa");
+        let bildePrieksa=document.createElement("img");
+        bildePrieksa.setAttribute("src",kopaPrieksa[0]);
+        bildePrieksa.classList.add("bildes");
+        kartsPrieksa.appendChild(bildePrieksa);
+
+     
+        //izveidojam div, kas kalpos kā kārts aizmugure
+        let kartsAizmugure=document.createElement("div");
+        kartsAizmugure.classList.add("aizmugure");
+        let bildeAizmugure=document.createElement("img");
+        bildeAizmugure.setAttribute("src", kopa[kartasSkaitlis]);
+        bildeAizmugure.classList.add("bildes");
+        kartsAizmugure.appendChild(bildeAizmugure);
+ 
+
+        kartina.appendChild(kartsPrieksa);
+       kartina.appendChild(kartsAizmugure);
+        sunas[i].appendChild(kartina);
+        kartina.classList.toggle("apgriezta");
+        setTimeout(() => {
+        kartina.classList.toggle("apgriezta");
+        kartina.addEventListener("click", apgrieztKartinu);
+        }, 5000);
+        kartasSkaitlis=kartasSkaitlis+1;
+    }
+}
 
 }
 }
+
 let divasKartinas=[];
 let kartesApgriesanasBloks = false;
 
