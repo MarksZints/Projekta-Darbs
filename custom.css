@@ -1,9 +1,14 @@
 
+#tabula {
+  font-size: 100%;
+  display:fixed;
+}
 #tabula td {
   padding: 8px;
   text-align: center;
   box-sizing: border-box;
   overflow: hidden;
+  margin-top: 200px;
 }
 .kartina {
   position: relative;
@@ -12,21 +17,49 @@
   transform-style: preserve-3d;
   transition: all 2s ease;
   border-radius: 10px;
+  min-width: 250px; /* Piešķiriet minimālo platumu */
+  min-height: 380px; /* Piešķiriet minimālo augstumu */
 }
-.prieksa{
-  position:absolute;
-  width:100%;
-  height:100%;
+
+#tabula {
+  font-size: 100%;
+  display:fixed;
+}
+#tabula td {
+  padding: 8px;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-top: 200px;
+}
+.kartina {
+  position: relative;
+  width: 250px;
+  height: 380px;
+  transform-style: preserve-3d;
+  transition: all 2s ease;
+  border-radius: 10px;
+  min-width: 250px; /* Piešķiriet minimālo platumu */
+  min-height: 380px; /* Piešķiriet minimālo augstumu */
+}
+
+
+
+.prieksa {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
   background-color: #333;
   border-radius: 10px;
   display: grid;
   place-items: center;
 }
-.aizmugure{
-  position:absolute;
-  width:100%;
-  height:100%;
+
+.aizmugure {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
   background-color: #e60e0e;
   transform: rotateY(180deg);
@@ -34,94 +67,177 @@
   display: grid;
   place-items: center;
 }
-.bildes{
-  width:237.5px;
+
+.bildes {
+  width: 237.5px;
   height: 361px;
   border-radius: 10px;
   object-fit: cover;
 }
-.apgriezta{
-transform: rotateY(180deg);
-}
 
+.apgriezta {
+  transform: rotateY(180deg);
+}
 
 
 body{
-    background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/3189.jpg");
-    background-size: cover; 
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4nJKIgDeWlXkf-d1Ui0ErL2p7hU5DWWosMsuA9HOIPU3t1RjB5vblnDbHm7S3LkJ3shg&usqp=CAU.jpg");
+  overflow: hidden;
 }
-.rules{
+
+.small {
+  transform: translateY(-220px) scale(0.7, 0.7);
+}
+.verysmall {
+  transform: translateY(-220px) scale(0.6, 0.6);
+}
+
+
+.prieksa {
   position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #333;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.aizmugure {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #e60e0e;
+  transform: rotateY(180deg);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.bildes {
+  width: 237.5px;
+  height: 361px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+
+.apgriezta {
+  transform: rotateY(180deg);
+}
+
+
+
+.rules {
+  display:block;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #7e09dd;
+  background: linear-gradient(90deg, rgb(85, 1, 253) 0%, rgb(123, 4, 202) 35%, rgb(176, 9, 218) 100%);
   border-radius: 15px;
-  width: 60%;
-  height:70%;
+  width: 60%; /* Mainiet, ja nepieciešams */
+  height: 70%; /* Mainiet, ja nepieciešams */
   text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-#virsraksts{
-  margin-top: 30px;
-  font-size: 500%; 
+
+#virsraksts {
+  margin-top: 5%;
+  font-size: 500%;
   color: beige;
+  position: static;
 }
-#turpinat{
-  width: 30%;
-  height:20%;
-  margin-left: 35%;
-  margin-bottom: 4%;
-  border-radius: 50px;
-  font-size: 250%; 
-  background-color: rgb(0, 177, 53);
-}
-#noteikumuApraksts{
-  font-size: 250%; 
+
+#noteikumuApraksts {
+  font-size: 300%;
   color: beige;
   margin: 2%;
+  position: static;
 }
+
+
+#turpinat {
+  margin-bottom: 5%;
+  border-radius: 5vw;
+  background-color: rgb(0, 177, 53);
+  position: static;
+  justify-content: center; 
+  align-items: center; 
+  color: beige; 
+  font-family: Arial, sans-serif; 
+}
+@media (min-width: 768px) {
+  #turpinat {
+    width: 40%;
+    height: 10%;
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 767px) {
+  #turpinat {
+    width: 80%;
+    height: 8vh;
+    font-size: 2vw;
+  }
+}
+
+
 .neredzams {
   display: none;
 }
-.opcijas{
-  position: absolute;
+
+.opcijas {
+  display:block;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #7e09dd;
+  background: linear-gradient(90deg, rgb(85, 1, 253) 0%, rgb(123, 4, 202) 35%, rgb(176, 9, 218) 100%);
   border-radius: 15px;
-  width: 60%;
-  height:70%;
+  width: 60%; /* Mainiet, ja nepieciešams */
+  height: 70%; /* Mainiet, ja nepieciešams */
   text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.saktSpeli{
-  width: 30%;
-  height:20%;
-  margin: 10%;
-  margin-left: 35%;
-  border-radius: 50px;
-  font-size: 250%; 
-  background-color: rgb(0, 177, 53);
-  align-items: center; 
-  justify-content: center; 
-  overflow: hidden;
-}
-.pogasTeksts{
-  color: beige;
-  margin: 2%;
-}
-.izvelesPoga{
-  width: 30%;
-  height:20%;
-  margin-left: 35%;
-  margin-bottom: 4%;
-  border-radius: 50px;
-  font-size: 250%; 
-  background-color: rgb(0, 177, 53);
 
+.saktSpeli,
+.izvelesPoga {
+  width: 60%; /* Mainiet, ja nepieciešams */
+  height: 10%; /* Mainiet, ja nepieciešams */
+  margin: 5% 0;
+  border-radius: 5vw; /* Mainiet, ja nepieciešams */
+  font-size: 2.5vw; /* Mainiet, ja nepieciešams */
+  background-color: rgb(0, 177, 53);
+  color: beige;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.cetrpadsmit {
+  transform: translateY(-300px) translateX(100px) scale(0.7, 0.7);
+}
+.sespadsmit {
+  transform: translateY(-220px) translateX(100px) scale(0.7, 0.7);
+}
+.astonpadsmit {
+  transform: translateY(-510px) translateX(50px) scale(0.6, 0.6);
+}
+.divdesmit {
+  transform: translateY(-220px)  scale(0.7, 0.7);
 }
 
