@@ -35,9 +35,10 @@ let tekstsPogai=document.createElement("p");
 tekstsPogai.innerText="Spied, lai sāktu spēli";
 tekstsPogai.classList.add("pogasTeksts");
 
-saktSpeli.appendChild(tekstsPogai);
 opcijuDiv.appendChild(saktSpeli);
 opcijuDiv.appendChild(izvelesPoga);
+saktSpeli.appendChild(tekstsPogai);
+
 
 var bodyElements = document.body;
 setTimeout(() => {
@@ -67,7 +68,6 @@ const kopa=["https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://www.latvia.travel/sites/default/files/styles/mobile_promo/public/media_image/tourism_sight/vecais_parks_pargaznis_evija_ziemina.jpg?itok=wKwzxnos.jpg",
 "https://aluksniesiem.lv/wp-content/uploads/2022/11/37-1024x633.jpg",
 "https://aluksniesiem.lv/wp-content/uploads/2022/11/37-1024x633.jpg",
-
 
 
 ];
@@ -186,8 +186,6 @@ let kartasSkaitlis=0;
 
     else if(nedalasArCetri==true){
         if(i!=grutibasPakape-4 && i!=grutibasPakape-1){
-        console.log(kartasSkaitlis);
-        console.log(i);
         // Izveido div elementu, lai noteiktu izmēru kārtij;
         let kartina=document.createElement("div");
         kartina.classList.add("kartina");
@@ -221,6 +219,18 @@ let kartasSkaitlis=0;
     }
 }
 
+}
+if (kartasSkaitlis == 14 ) {
+    tabulina.classList.add("cetrpadsmit");
+}
+else if (grutibasPakape == 16) {
+    tabulina.classList.add("sespadsmit");
+}
+else if (kartasSkaitlis == 18) {
+    tabulina.classList.add("astonpadsmit");
+}
+else if (grutibasPakape == 20) {
+    tabulina.classList.add("divdesmit");
 }
 }
 
@@ -269,6 +279,8 @@ function parbauditVaiVienadas() {
         kluduSkaits=0;
         pareizoSkaits=0;
     }
+}
+
 }
 
 }
