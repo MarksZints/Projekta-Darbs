@@ -282,5 +282,3 @@ function parbauditVaiVienadas() {
 }
 
 }
-
-}
