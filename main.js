@@ -5,8 +5,7 @@ turpinat.addEventListener("click", nonemt);
 
 
 let laikaVertiba;
-
-
+let ieslegtaPoga=false;
 function nonemt(){
  
 //tiek noņemts pirmais uznirstošais logs ar noteikumiem
@@ -36,7 +35,11 @@ opcijas.forEach((opcija, indekss) => {
     izvelesPoga.add(jaunaOpcija);
 });
 
+opcijuDiv.appendChild(skaitaApraksts);
+opcijuDiv.appendChild(izvelesPoga);
 
+
+//SĀKAS OTRĀ RINDA
 var laikaApraksts=document.createElement("p");
 laikaApraksts.innerText=("Ieraksti kāršu apskatīšanās laiku!");
 laikaApraksts.classList.add("laikaApraksts");
@@ -48,18 +51,42 @@ laikaInput.max = "20";
 laikaInput.min="3";
 
 
+opcijuDiv.appendChild(laikaApraksts);
+opcijuDiv.appendChild(laikaInput);
+//SĀKAS TREŠĀ RINDA
+
+var kluduApraksts=document.createElement("p");
+kluduApraksts.innerText=("Rādīt kļūdu skaitu spēles laikā:");
+kluduApraksts.classList.add("laikaApraksts");
+
+let switchLabel = document.createElement("label");
+switchLabel.classList.add("switch");
+
+let switchInput = document.createElement("input");
+switchInput.type = "checkbox";
+switchInput.id = "switch1"; 
+switchInput.addEventListener("change", toggleSwitch);
+
+let switchSlider = document.createElement("span");
+switchSlider.classList.add("slider", "round");
+switchSlider.id = "slider1"; 
+
+
+switchLabel.classList.add("lielaks");
+
+switchLabel.appendChild(switchInput);
+switchLabel.appendChild(switchSlider);
+opcijuDiv.appendChild(kluduApraksts);
+opcijuDiv.appendChild(switchLabel);
+
+
+//SĀKAS CETURTĀ RINDA
 let saktSpeli=document.createElement("button");
 saktSpeli.classList.add("saktSpeli");
 
 let tekstsPogai=document.createElement("p");
 tekstsPogai.innerText="Spied, lai sāktu spēli";
 tekstsPogai.classList.add("pogasTeksts");
-
-opcijuDiv.appendChild(skaitaApraksts);
-opcijuDiv.appendChild(izvelesPoga);
-
-opcijuDiv.appendChild(laikaApraksts);
-opcijuDiv.appendChild(laikaInput);
 
 saktSpeli.appendChild(tekstsPogai);
 opcijuDiv.appendChild(saktSpeli);
@@ -81,8 +108,16 @@ else{
 }
 }
 
+function toggleSwitch() {
+    if (switchInput.checked) {
+        ieslegtaPoga=true;
+    } else {
+        ieslegtaPoga=false;
+    }
+}
+
 function sajauktDatus() {
-alert(laikaVertiba);
+tabulina.classList.remove("neredzams");
 const kopa=["https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://static.lsm.lv/media/2021/06/large/1/ffi2.jpg",
@@ -253,7 +288,16 @@ let kartasSkaitlis=0;
 }
 
 }
-if (kartasSkaitlis == 14 ) {
+if (grutibasPakape == 8 ) {
+    tabulina.classList.add("astoni");
+}
+else if (grutibasPakape == 10 ) {
+    tabulina.classList.add("desmit");
+}
+else if (grutibasPakape == 12 ) {
+    tabulina.classList.add("divpadsmit");
+}
+else if (kartasSkaitlis == 14 ) {
     tabulina.classList.add("cetrpadsmit");
 }
 else if (grutibasPakape == 16) {
@@ -307,9 +351,60 @@ function parbauditVaiVienadas() {
 
     }
     if(pareizoSkaits==vienadiPari){
-      alert("čau");
+     
       tabulina.classList.add("neredzams");
+      let beigas= document.createElement("div");
+      beigas.classList.remove("neredzams");
+      beigas.classList.add("beiguDiv");
+
+     let noJauna=document.createElement("button");
+     noJauna.innerText="Sākt no jauna";
+     noJauna.classList.add("noJauna");
+
+     let parladet=document.createElement("button");
+     parladet.innerText="Mainīt  spēles iestatījumus";
+     parladet.classList.add("parladet");
+
+     if(ieslegtaPoga==true){
+        let beiguTeksts=document.createElement("p");
+        if (kluduSkaits==0){
+        beiguTeksts.innerText="Apsveicam! Jūs pabeidzāt spēli bez jebkādām kļūdām.";
+        }
+        else if (kluduSkaits==1){
+        beiguTeksts.innerText="Apsveicam! Jūs pabeidzāt spēli ar vienu kļūdu";
+        }
+        else if (kluduSkaits>=2){
+            beiguTeksts.innerText="Apsveicam! Jūs pabeidzāt spēli ar "+kluduSkaits+" kļūdām";
+            }
+        beiguTeksts.classList.add("beiguTeksts");
+        beigas.classList.remove("beiguDiv");
+        beigas.classList.add("beiguDivL");
+        beigas.appendChild(beiguTeksts);
+        }
+
+     beigas.appendChild(parladet);
+     beigas.appendChild(noJauna);
+     bodyElements.appendChild(beigas);
+
+     beigas.addEventListener('click',nonemtBeigas);
+     parladet.addEventListener('click', parladetVietni);
+
+     pareizoSkaits=0;
+     vienadiPari=0;
+     kluduSkaits=0;
+     function nonemtBeigas(){
+        beigas.classList.remove("beiguDiv");
+        beigas.classList.remove("beiguDivL");
+        beigas.classList.add("neredzams");
+
+        setTimeout(sajauktDatus,500);
+     }
+    function parladetVietni(){
+        window.location.reload();
+    }
+
+
+      
     }
 }
 
-}
