@@ -3,6 +3,10 @@ let noteikumi=document.getElementById("noteikumi");
 let vienadiPari=0;
 turpinat.addEventListener("click", nonemt);
 
+
+let laikaVertiba;
+
+
 function nonemt(){
  
 //tiek noņemts pirmais uznirstošais logs ar noteikumiem
@@ -13,7 +17,14 @@ let kluduSkaits=0;
 let pareizoSkaits=0;
 const tabulina = document.getElementById("tabula");
 
-//tiek izveidota grutibas pakapes izvēles poga
+//tiek izveidots opciju div elements, kurā tiks ievietoti iestatījumi
+
+let opcijuDiv=document.createElement("div");
+opcijuDiv.classList.add("opcijas");
+
+let skaitaApraksts=document.createElement("p");
+skaitaApraksts.innerText=("Izvēlies kāršu skaitu!");
+skaitaApraksts.classList.add("skaitaApraksts")
 
 const izvelesPoga = document.createElement("select");
 izvelesPoga.classList.add("izvelesPoga");
@@ -25,8 +36,17 @@ opcijas.forEach((opcija, indekss) => {
     izvelesPoga.add(jaunaOpcija);
 });
 
-let opcijuDiv=document.createElement("div");
-opcijuDiv.classList.add("opcijas");
+
+var laikaApraksts=document.createElement("p");
+laikaApraksts.innerText=("Ieraksti kāršu apskatīšanās laiku!");
+laikaApraksts.classList.add("laikaApraksts");
+
+let laikaInput=document.createElement("input");
+laikaInput.type = "number";
+laikaInput.id = "laikaInput"; 
+laikaInput.max = "20";
+laikaInput.min="3";
+
 
 let saktSpeli=document.createElement("button");
 saktSpeli.classList.add("saktSpeli");
@@ -35,19 +55,34 @@ let tekstsPogai=document.createElement("p");
 tekstsPogai.innerText="Spied, lai sāktu spēli";
 tekstsPogai.classList.add("pogasTeksts");
 
-opcijuDiv.appendChild(saktSpeli);
+opcijuDiv.appendChild(skaitaApraksts);
 opcijuDiv.appendChild(izvelesPoga);
-saktSpeli.appendChild(tekstsPogai);
 
+opcijuDiv.appendChild(laikaApraksts);
+opcijuDiv.appendChild(laikaInput);
+
+saktSpeli.appendChild(tekstsPogai);
+opcijuDiv.appendChild(saktSpeli);
 
 var bodyElements = document.body;
 setTimeout(() => {
-    bodyElements.appendChild(opcijuDiv);
-}, 1000);
+    bodyElements.insertBefore(opcijuDiv, bodyElements.firstChild);
+}, 200);
 
-saktSpeli.addEventListener("click", sajauktDatus);
-//tiek nodefinēti elementi= tabula, rindas tabulā, tabulu šūnu skaits un kāršu pāru skaits, kā arī grūtības pakāpe.
+saktSpeli.addEventListener("click", parbauditIevadi);
+
+function parbauditIevadi(){
+laikaVertiba=laikaInput.value;
+if(laikaVertiba==""){
+    alert("Ievadiet laika vērtību");   
+}
+else{
+    sajauktDatus();
+}
+}
+
 function sajauktDatus() {
+alert(laikaVertiba);
 const kopa=["https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://svs.edu.lv/wp-content/uploads/2023/04/s7-770x433.jpg",
 "https://static.lsm.lv/media/2021/06/large/1/ffi2.jpg",
@@ -120,7 +155,6 @@ else  {
 }
        
     const sunas = tabulina.getElementsByTagName('td');
-alert("grūtības pakāpe ir " +grutibasPakape);
 
 
 
@@ -138,7 +172,6 @@ if(nedalasArCetri==true){
         [kopa[i], kopa[randomIndex]] = [kopa[randomIndex], kopa[i]];
     }
     vienadiPari=(grutibasPakape-2)/2;
-    alert(vienadiPari);
 }
 //kārtis tiek samaisītas nejaušā secībā  (bilžu skaits dalās ar 4)
 else if(nedalasArCetri==false){
@@ -180,7 +213,7 @@ let kartasSkaitlis=0;
         setTimeout(() => {
         kartina.classList.toggle("apgriezta");
         kartina.addEventListener("click", apgrieztKartinu);
-        }, 5000);
+        }, laikaVertiba*1000);
     }
 
 
@@ -214,7 +247,7 @@ let kartasSkaitlis=0;
         setTimeout(() => {
         kartina.classList.toggle("apgriezta");
         kartina.addEventListener("click", apgrieztKartinu);
-        }, 5000);
+        }, laikaVertiba*1000);
         kartasSkaitlis=kartasSkaitlis+1;
     }
 }
@@ -274,10 +307,8 @@ function parbauditVaiVienadas() {
 
     }
     if(pareizoSkaits==vienadiPari){
-        alert("Apsveicam, jūs beidzāt spēli ar " +kluduSkaits+ " kļūdām.");
-        vienadiPari=4;
-        kluduSkaits=0;
-        pareizoSkaits=0;
+      alert("čau");
+      tabulina.classList.add("neredzams");
     }
 }
 
